@@ -4,6 +4,7 @@ import tkinter as tk
 from tkinter import ttk
 import os
 
+
 def main(self):
     self.title('Organizador de Arquivos')
     self.config(bg='#5c646e')
@@ -50,6 +51,7 @@ def main(self):
     b_videos.pack(side=tk.TOP)
     b_documentos.pack(side=tk.TOP)
     b_musicas.pack(side=tk.TOP)
+
 
 def run():
     root = tk.Tk()
