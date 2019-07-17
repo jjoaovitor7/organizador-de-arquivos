@@ -22,19 +22,19 @@ def main(self):
 
     def mover_imagens():
         os.system('mkdir Imagens')
-        os.system('mv *png Imagens')
+        os.system('mv *.jpg *.png Imagens')
 
     def mover_videos():
         os.system('mkdir Vídeos')
-        os.system('mv *mp4 Videos')
+        os.system('mv *.avi *.mp4 Vídeos')
 
     def mover_documentos():
         os.system('mkdir Documentos')
-        os.system('mv *doc *docx Documentos')
+        os.system('mv *.doc *.docx *.odt Documentos')
 
     def mover_musicas():
         os.system('mkdir Músicas')
-        os.system('mv *mp3 Músicas')
+        os.system('mv *.mp3 Músicas')
 
     b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
                            command=mover_imagens)
