@@ -3,7 +3,7 @@
 import tkinter as tk
 from tkinter import ttk
 import os
-from datetime import datetime
+import logging
 
 
 def main(self):
@@ -24,42 +24,34 @@ def main(self):
     def mover_imagens():
         os.system('mkdir Imagens')
         os.system('mv *.bmp *.jpeg *.jpg *.png Imagens')
-        
-        horario = datetime.now()
-        horario_log = ('[' + str(horario.hour) + ':' + str(horario.minute) + ':' + str(horario.second) + ']')
-        log = open('log.txt', 'a')
-        log.write(horario_log + ' mover_imagens' + '\n')
-        log.close()
+
+        logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                           level=logging.INFO)
+        logging.info('mover_imagens')
 
     def mover_videos():
         os.system('mkdir Vídeos')
         os.system('mv *.avi *.mp4 Vídeos')
-        
-        horario = datetime.now()
-        horario_log = ('[' + str(horario.hour) + ':' + str(horario.minute) + ':' + str(horario.second) + ']')
-        log = open('log.txt', 'a')
-        log.write(horario_log + ' mover_vídeos' + '\n')
-        log.close()
+
+        logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                           level=logging.INFO)
+        logging.info('mover_vídeos')
 
     def mover_documentos():
         os.system('mkdir Documentos')
         os.system('mv *.doc *.docx *.odt Documentos')
-        
-        horario = datetime.now()
-        horario_log = ('[' + str(horario.hour) + ':' + str(horario.minute) + ':' + str(horario.second) + ']')
-        log = open('log.txt', 'a')
-        log.write(horario_log + ' mover_documentos' + '\n')
-        log.close()
+
+        logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                           level=logging.INFO)
+        logging.info('mover_documentos')
 
     def mover_musicas():
         os.system('mkdir Músicas')
         os.system('mv *.mp3 *.wav Músicas')
-        
-        horario = datetime.now()
-        horario_log = ('[' + str(horario.hour) + ':' + str(horario.minute) + ':' + str(horario.second) + ']')
-        log = open('log.txt', 'a')
-        log.write(horario_log + ' mover_músicas' + '\n')
-        log.close()
+
+        logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                           level=logging.INFO)
+        logging.info('mover_músicas')
 
     b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
                            command=mover_imagens)
