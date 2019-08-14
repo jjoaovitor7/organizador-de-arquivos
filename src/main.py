@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog
 import os
 import logging
 
@@ -9,7 +10,7 @@ import logging
 def main(self):
     self.title('Organizador de Arquivos')
     self.config(bg='#5c646e')
-    self.geometry('300x150')
+    self.geometry('450x165')
 
     style = ttk.Style()
     style.configure('main.TLabel', background='#5c646e',
@@ -20,6 +21,17 @@ def main(self):
 
     l_titulo = ttk.Label(self, text='Organizador de Arquivos',
                          style='main.TLabel')
+
+
+    l_pasta_atual = ttk.Label(self, text=os.getcwd(),
+                              style='main.TLabel')
+
+    def trocar_pasta(event):
+        pasta = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
+        os.chdir(pasta)
+        l_pasta_atual['text'] = os.getcwd()
+
+    l_pasta_atual.bind('<Button-1>', trocar_pasta)
 
     def mover_imagens():
         os.system('mkdir Imagens')
@@ -63,6 +75,8 @@ def main(self):
                            command=mover_musicas)
 
     l_titulo.pack(side=tk.TOP)
+    l_pasta_atual.pack(side=tk.TOP)
+
 
     b_imagens.pack(side=tk.TOP)
     b_videos.pack(side=tk.TOP)
