@@ -35,7 +35,7 @@ def main(self):
 
     def mover_imagens():
         os.system('mkdir Imagens')
-        os.system('mv *.bmp *.jpeg *.jpg *.nef *.png *.svg *.tiff Imagens')
+        os.system('mv *.bmp *.jpeg *.jpg *.nef *.png *.svg *.tiff *.webp Imagens')
 
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
@@ -43,7 +43,7 @@ def main(self):
 
     def mover_videos():
         os.system('mkdir Vídeos')
-        os.system('mv *.avi *.mp4 *.mpg Vídeos')
+        os.system('mv *.avi *.mp4 *.mpg *.webm Vídeos')
 
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
