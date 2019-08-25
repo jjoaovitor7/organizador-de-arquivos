@@ -35,7 +35,7 @@ def main(self):
 
     def mover_imagens():
         os.system('mkdir Imagens')
-        os.system('mv *.bmp *.jpeg *.jpg *.nef *.png *.svg *.tiff *.webp Imagens')
+        os.system('mv *.bmp *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp Imagens')
 
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
