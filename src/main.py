@@ -22,15 +22,18 @@ def main(self):
     l_titulo = ttk.Label(self, text='Organizador de Arquivos',
                          style='main.TLabel')
 
-
     l_pasta_atual = ttk.Label(self, text=os.getcwd(),
                               style='main.TLabel')
 
     def trocar_pasta(event):
-        pasta = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
-        os.chdir(pasta)
-        l_pasta_atual['text'] = os.getcwd()
-
+        try:
+            pasta = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
+            os.chdir(pasta)
+            l_pasta_atual['text'] = os.getcwd()
+        except FileNotFoundError:
+            logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                                level=logging.INFO)
+            logging.info('A pasta não foi encontrada!')
     l_pasta_atual.bind('<Button-1>', trocar_pasta)
 
     def mover_imagens():
