@@ -36,37 +36,38 @@ def main(self):
             logging.info('A pasta não foi encontrada!')
     l_pasta_atual.bind('<Button-1>', trocar_pasta)
 
+
     def mover_imagens():
         os.system('mkdir Imagens')
-        os.system('mv *.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp Imagens')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_imagens')
+        os.system('mv -v *.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp Imagens >> info.log')
+
 
     def mover_videos():
         os.system('mkdir Vídeos')
-        os.system('mv *.avi *.mp4 *.mpg *.webm Vídeos')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_vídeos')
+        os.system('mv -v *.avi *.mp4 *.mpg *.webm Vídeos >> info.log')
+
 
     def mover_documentos():
         os.system('mkdir Documentos')
-        os.system('mv *.doc *.docx *.odt *.pdf Documentos')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_documentos')
+        os.system('mv -v *.doc *.docx *.odt *.pdf Documentos >> info.log')
+
 
     def mover_musicas():
         os.system('mkdir Músicas')
-        os.system('mv *.aac *.mp3 *.ogg *.wav Músicas')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_músicas')
+        os.system('mv -v *.aac *.mp3 *.ogg *.wav Músicas >> info.log')
+
 
     b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
                            command=mover_imagens)
