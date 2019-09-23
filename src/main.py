@@ -37,12 +37,19 @@ def main(self):
     l_pasta_atual.bind('<Button-1>', trocar_pasta)
 
 
+    formatos={
+        "imagem": {"formatos": "*.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp"},
+        "video": {"formatos": "*.avi *.mp4 *.mpg *.webm"},
+        "documento": {"formatos": "*.doc *.docx *.odt *.pdf"},
+        "musica": {"formatos": "*.aac *.mp3 *.ogg *.wav"}
+     }
+
     def mover_imagens():
         os.system('mkdir Imagens')
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_imagens')
-        os.system('mv -v *.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp Imagens >> info.log')
+        os.system('mv -v ' + formatos["imagem"]["formatos"] + ' Imagens >> info.log')
 
 
     def mover_videos():
@@ -50,7 +57,7 @@ def main(self):
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_vídeos')
-        os.system('mv -v *.avi *.mp4 *.mpg *.webm Vídeos >> info.log')
+        os.system('mv -v ' + formatos["video"]["formatos"] + ' Vídeos >> info.log')
 
 
     def mover_documentos():
@@ -58,7 +65,7 @@ def main(self):
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_documentos')
-        os.system('mv -v *.doc *.docx *.odt *.pdf Documentos >> info.log')
+        os.system('mv -v ' + formatos["documento"]["formatos"] + ' Documentos >> info.log')
 
 
     def mover_musicas():
@@ -66,7 +73,7 @@ def main(self):
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_músicas')
-        os.system('mv -v *.aac *.mp3 *.ogg *.wav Músicas >> info.log')
+        os.system('mv -v ' + formatos["musica"]["formatos"] + ' Músicas >> info.log')
 
 
     b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
