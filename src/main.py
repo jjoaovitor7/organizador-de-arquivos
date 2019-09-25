@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import tkinter as tk
 from tkinter import ttk
+from tkinter import filedialog
 import os
 import logging
 
@@ -9,7 +10,7 @@ import logging
 def main(self):
     self.title('Organizador de Arquivos')
     self.config(bg='#5c646e')
-    self.geometry('300x150')
+    self.geometry('450x165')
 
     style = ttk.Style()
     style.configure('main.TLabel', background='#5c646e',
@@ -21,37 +22,59 @@ def main(self):
     l_titulo = ttk.Label(self, text='Organizador de Arquivos',
                          style='main.TLabel')
 
+    l_pasta_atual = ttk.Label(self, text=os.getcwd(),
+                              style='main.TLabel')
+
+    def trocar_pasta(event):
+        try:
+            pasta = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
+            os.chdir(pasta)
+            l_pasta_atual['text'] = os.getcwd()
+        except FileNotFoundError:
+            logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
+                                level=logging.INFO)
+            logging.info('A pasta não foi encontrada!')
+    l_pasta_atual.bind('<Button-1>', trocar_pasta)
+
+
+    formatos={
+        "imagem": {"formatos": "*.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp"},
+        "video": {"formatos": "*.avi *.mp4 *.mpg *.webm"},
+        "documento": {"formatos": "*.doc *.docx *.odt *.pdf"},
+        "musica": {"formatos": "*.aac *.mp3 *.ogg *.wav"}
+     }
+
     def mover_imagens():
         os.system('mkdir Imagens')
-        os.system('mv *.bmp *.jpeg *.jpg *.nef *.png *.svg *.tiff Imagens')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_imagens')
+        os.system('mv -v ' + formatos["imagem"]["formatos"] + ' Imagens >> info.log')
+
 
     def mover_videos():
         os.system('mkdir Vídeos')
-        os.system('mv *.avi *.mp4 *.mpg Vídeos')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_vídeos')
+        os.system('mv -v ' + formatos["video"]["formatos"] + ' Vídeos >> info.log')
+
 
     def mover_documentos():
         os.system('mkdir Documentos')
-        os.system('mv *.doc *.docx *.odt *.pdf Documentos')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_documentos')
+        os.system('mv -v ' + formatos["documento"]["formatos"] + ' Documentos >> info.log')
+
 
     def mover_musicas():
         os.system('mkdir Músicas')
-        os.system('mv *.aac *.mp3 *.ogg *.wav Músicas')
-
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
         logging.info('mover_músicas')
+        os.system('mv -v ' + formatos["musica"]["formatos"] + ' Músicas >> info.log')
+
 
     b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
                            command=mover_imagens)
@@ -63,6 +86,8 @@ def main(self):
                            command=mover_musicas)
 
     l_titulo.pack(side=tk.TOP)
+    l_pasta_atual.pack(side=tk.TOP)
+
 
     b_imagens.pack(side=tk.TOP)
     b_videos.pack(side=tk.TOP)
