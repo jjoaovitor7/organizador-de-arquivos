@@ -27,7 +27,6 @@ def main(self):
                     foreground='#000000', font=('Times New Roman', 14),
                     width=11, relief=tk.RAISED)
 
-
     formatos={
         "imagem": {"formatos": "*.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp"},
         "video": {"formatos": "*.avi *.mp4 *.mpg *.webm"},
