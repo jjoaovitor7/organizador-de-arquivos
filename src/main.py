@@ -19,7 +19,6 @@ def main(self):
     def colorWindow():
             self.config(bg='#5c646e')
 
-
     style = ttk.Style()
     style.configure('main.TLabel', background='#5c646e',
                     foreground='#000000', font=('Times New Roman', 14))
