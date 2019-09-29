@@ -8,9 +8,17 @@ import logging
 
 
 def main(self):
-    self.title('Organizador de Arquivos')
-    self.config(bg='#5c646e')
-    self.geometry('450x165')
+    def setTitle():
+        self.title('Organizador de Arquivos')
+
+
+    def setGeometry():
+        self.geometry('450x165')
+
+
+    def colorWindow():
+            self.config(bg='#5c646e')
+
 
     style = ttk.Style()
     style.configure('main.TLabel', background='#5c646e',
@@ -18,23 +26,6 @@ def main(self):
     style.configure('main.TButton', background='#727c87',
                     foreground='#000000', font=('Times New Roman', 14),
                     width=11, relief=tk.RAISED)
-
-    l_titulo = ttk.Label(self, text='Organizador de Arquivos',
-                         style='main.TLabel')
-
-    l_pasta_atual = ttk.Label(self, text=os.getcwd(),
-                              style='main.TLabel')
-
-    def trocar_pasta(event):
-        try:
-            pasta = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
-            os.chdir(pasta)
-            l_pasta_atual['text'] = os.getcwd()
-        except FileNotFoundError:
-            logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
-                                level=logging.INFO)
-            logging.info('A pasta não foi encontrada!')
-    l_pasta_atual.bind('<Button-1>', trocar_pasta)
 
 
     formatos={
@@ -44,55 +35,72 @@ def main(self):
         "musica": {"formatos": "*.aac *.mp3 *.ogg *.wav"}
      }
 
-    def mover_imagens():
+    def imagesMov():
         os.system('mkdir Imagens')
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
-        logging.info('mover_imagens')
+        logging.info('Imagens Movidas')
         os.system('mv -v ' + formatos["imagem"]["formatos"] + ' Imagens >> info.log')
 
 
-    def mover_videos():
+    def videosMov():
         os.system('mkdir Vídeos')
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
-        logging.info('mover_vídeos')
+        logging.info('Vídeos Movidos')
         os.system('mv -v ' + formatos["video"]["formatos"] + ' Vídeos >> info.log')
 
 
-    def mover_documentos():
+    def docsMov():
         os.system('mkdir Documentos')
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
-        logging.info('mover_documentos')
+        logging.info('Documentos Movidos')
         os.system('mv -v ' + formatos["documento"]["formatos"] + ' Documentos >> info.log')
 
 
-    def mover_musicas():
+    def musicsMov():
         os.system('mkdir Músicas')
         logging.basicConfig(filename='info.log', format='[%(asctime)s] %(levelname)s: %(message)s',
                             level=logging.INFO)
-        logging.info('mover_músicas')
+        logging.info('Músicas Movidas')
         os.system('mv -v ' + formatos["musica"]["formatos"] + ' Músicas >> info.log')
 
 
-    b_imagens = ttk.Button(self, text='Imagens', style='main.TButton',
-                           command=mover_imagens)
-    b_videos = ttk.Button(self, text='Videos', style='main.TButton',
-                          command=mover_videos)
-    b_documentos = ttk.Button(self, text='Documentos', style='main.TButton',
-                              command=mover_documentos)
-    b_musicas = ttk.Button(self, text='Músicas', style='main.TButton',
-                           command=mover_musicas)
+    def setWidgets():
+        titleLabel = ttk.Label(self, text='Organizador de Arquivos',
+                               style='main.TLabel').pack(side=tk.TOP)
 
-    l_titulo.pack(side=tk.TOP)
-    l_pasta_atual.pack(side=tk.TOP)
+        actualFolderLabel = ttk.Label(self, text=os.getcwd(),
+                              style='main.TLabel')
+        actualFolderLabel.pack(side=tk.TOP)
 
+        imagesButton = ttk.Button(self, text='Imagens', style='main.TButton',
+                                  command=imagesMov).pack(side=tk.TOP)
+        videosButton = ttk.Button(self, text='Videos', style='main.TButton',
+                                  command=videosMov).pack(side=tk.TOP)
+        docsButton = ttk.Button(self, text='Documentos', style='main.TButton',
+                                command=docsMov).pack(side=tk.TOP)
+        musicsButton = ttk.Button(self, text='Músicas', style='main.TButton',
+                                  command=musicsMov).pack(side=tk.TOP)
 
-    b_imagens.pack(side=tk.TOP)
-    b_videos.pack(side=tk.TOP)
-    b_documentos.pack(side=tk.TOP)
-    b_musicas.pack(side=tk.TOP)
+        def changeFolder(event):
+            try:
+                folder = filedialog.askdirectory(initialdir=os.getcwd(), title='Selecionar Pasta')
+                os.chdir(folder)
+                actualFolderLabel.config(text=os.getcwd())
+            except FileNotFoundError:
+                logging.basicConfig(filename='info.log',
+                                    format='[%(asctime)s] %(levelname)s: %(message)s',
+                                    level=logging.INFO)
+                logging.info('A pasta não foi encontrada!')
+        actualFolderLabel.bind('<Button-1>', changeFolder)
+
+    setTitle()
+    setGeometry()
+    colorWindow()
+
+    setWidgets()
 
 
 def run():
