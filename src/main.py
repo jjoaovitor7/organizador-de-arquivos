@@ -17,17 +17,17 @@ def main(self):
 
 
     def colorWindow():
-            self.config(bg='#5c646e')
+            self.config(bg='#222')
 
     style = ttk.Style()
-    style.configure('main.TLabel', background='#5c646e',
-                    foreground='#000000', font=('Times New Roman', 14))
-    style.configure('main.TButton', background='#727c87',
-                    foreground='#000000', font=('Times New Roman', 14),
+    style.configure('main.TLabel', background='#222',
+                    foreground='#fff', font=('Times New Roman', 14))
+    style.configure('main.TButton', background='#222',
+                    foreground='#000', font=('Times New Roman', 14),
                     width=11, relief=tk.RAISED)
 
     formatos={
-        "imagem": {"formatos": "*.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp"},
+        "imagem": {"formatos": "*.bmp *.jfif *.jpeg *.jpg *.nef *.png *.raw *.svg *.tiff *.webp *.gif"},
         "video": {"formatos": "*.avi *.mp4 *.mpg *.webm"},
         "documento": {"formatos": "*.doc *.docx *.odt *.pdf"},
         "musica": {"formatos": "*.aac *.mp3 *.ogg *.wav"}
